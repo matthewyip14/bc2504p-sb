@@ -1,5 +1,8 @@
 com/bootcamp/demo/demo_helloworld/DemoHelloworldApplication.class
 com/bootcamp/demo/demo_helloworld/ShoppingMall.class
+com/bootcamp/demo/demo_helloworld/Cat.class
 com/bootcamp/demo/demo_helloworld/ShoppingMall$Cinema.class
-com/bootcamp/demo/demo_helloworld/ShoppingMall$Cinema$Film.class
 com/bootcamp/demo/demo_helloworld/HelloController.class
+com/bootcamp/demo/demo_helloworld/ShoppingMall$Cinema$Film.class
+com/bootcamp/demo/demo_helloworld/ProductController.class
+com/bootcamp/demo/demo_helloworld/CatController.class
