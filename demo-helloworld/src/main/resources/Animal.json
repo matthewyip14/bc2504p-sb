@@ -1,0 +1,16 @@
+{
+  "name": "John",
+  "age": 13
+}
+// Animal.class
+// JSON -> List<Animal>
+[
+  {
+    "name": "John",
+    "age": null
+  },
+  {
+    "name": "Mary",
+    "age": 17
+  }
+]
