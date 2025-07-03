@@ -8,9 +8,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.bootcamp.demo.demo_calculator.model.Cat;
+import com.bootcamp.demo.demo_calculator.model.Dog;
 
 // ! RESTful API / REST API
 public interface CatOperation {
+
+  // Test Dog Bean
+  @GetMapping(value = "/dog")
+  Dog dogSum(@PathVariable(value = "a") Integer a,
+      @PathVariable(value = "b") Integer b);
+      
   // ! SQL: insert into
   @PostMapping(value = "/cat")
   boolean addCat(@RequestBody Cat cat);

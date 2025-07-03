@@ -3,7 +3,8 @@ package com.bootcamp.demo.demo_calculator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication // ! ComponentSacn
+// ! @Component -> @Controller, @Service, @Repository, @Configuration + @Bean, @Component
 public class DemoCalculatorApplication {
 
 	public static void main(String[] args) {

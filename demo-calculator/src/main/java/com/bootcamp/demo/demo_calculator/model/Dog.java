@@ -1,0 +1,14 @@
+package com.bootcamp.demo.demo_calculator.model;
+
+import org.springframework.stereotype.Component;
+
+@Component // new Dog()
+public class Dog {
+  public int sum(int a, int b) {
+    return a + b;
+  }
+  public static void main(String[] args) {
+    Dog d1 = new Dog();
+    System.out.println(d1.sum(3,4));
+  }
+}

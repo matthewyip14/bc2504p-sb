@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootcamp.demo.demo_calculator.controller.CatOperation;
 import com.bootcamp.demo.demo_calculator.model.Cat;
+import com.bootcamp.demo.demo_calculator.model.Dog;
 import com.bootcamp.demo.demo_calculator.service.CatService;
 
   // ! (Always) Controller -> Service
@@ -13,8 +14,21 @@ import com.bootcamp.demo.demo_calculator.service.CatService;
 @Controller
 @ResponseBody
 public class CatController implements CatOperation {
+  
+  
+  @Autowired // ! The way to ask Spring manager help to pick up the bean 呼喚
+  private CatService catService; // bean
+
   @Autowired
-  private CatService catService; // No object
+  private Dog dog;
+
+  @Override
+  public Integer dogSum(Integer a, Integer b) {
+    return this.dog.sum(a, b);
+  }
+  
+
+  
 
   @Override
   public boolean addCat(Cat cat) {

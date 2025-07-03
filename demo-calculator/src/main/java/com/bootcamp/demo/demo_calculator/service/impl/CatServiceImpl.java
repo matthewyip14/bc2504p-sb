@@ -6,6 +6,8 @@ import com.bootcamp.demo.demo_calculator.database.CatDatabase;
 import com.bootcamp.demo.demo_calculator.model.Cat;
 import com.bootcamp.demo.demo_calculator.service.CatService;
 
+// ! Spring checks annotation @service is required to create an object 
+// ! and then put it into the Spring context
 @Service
 public class CatServiceImpl implements CatService {
   @Override
