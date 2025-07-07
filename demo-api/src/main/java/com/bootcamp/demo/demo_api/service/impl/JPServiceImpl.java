@@ -1,11 +1,13 @@
 package com.bootcamp.demo.demo_api.service.impl;
 
+import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.bootcamp.demo.demo_api.model.dto.UserDTO;
@@ -42,4 +44,7 @@ public class JPServiceImpl implements JPService {
     UserDTO[] users = this.restTemplate.getForObject(url, UserDTO[].class);
     return Arrays.asList(users);
   }
+  
+  
+  
 }

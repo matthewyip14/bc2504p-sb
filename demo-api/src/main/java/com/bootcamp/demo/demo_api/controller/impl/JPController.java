@@ -12,6 +12,7 @@ public class JPController implements JPOperation {
   @Autowired
   private JPService jpService;
 
+  // ! List<UserDTO> -> Postman (JSON) (Serialiaztion)
   @Override
   public List<UserDTO> getAllJPUsers() {
     return jpService.getUsers();
