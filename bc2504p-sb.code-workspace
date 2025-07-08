@@ -1,24 +1,24 @@
 {
     "folders": [
         {
-            "name": "Root",
-            "path": "."
+            "name": "demo-api",
+            "path": "demo-api"
         },
         {
-            "name": "Demo Calculator",
-            "path": "./demo-calculator"
+            "name": "demo-calculator",
+            "path": "demo-calculator"
         },
         {
-            "name": "Demo Exercise Calculator",
-            "path": "./demo-exercise-calculator"
+            "name": "demo-exercise-calculator",
+            "path": "demo-exercise-calculator"
         },
         {
-            "name": "Demo Hello World",
-            "path": "./demo-helloworld"
+            "name": "demo-hello2orld",
+            "path": "demo-helloworld"
         },
         {
-            "name": "Demo JPA",
-            "path": "./demo-jpa"
+            "name": "demo-jpa",
+            "path": "demo-jpa"
         }
     ],
     "settings": {
