@@ -1,0 +1,52 @@
+{
+    "folders": [
+        {
+            "name": "Root",
+            "path": "."
+        },
+        {
+            "name": "Demo Calculator",
+            "path": "./demo-calculator"
+        },
+        {
+            "name": "Demo Exercise Calculator",
+            "path": "./demo-exercise-calculator"
+        },
+        {
+            "name": "Demo Hello World",
+            "path": "./demo-helloworld"
+        },
+        {
+            "name": "Demo JPA",
+            "path": "./demo-jpa"
+        }
+    ],
+    "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.compile.nullAnalysis.mode": "automatic",
+        "java.dependency.syncWithFolderExplorer": true,
+        "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+        "java.format.settings.profile": "GoogleStyle",
+        "maven.executable.path": "mvn",
+        "files.exclude": {
+            "**/target": true,
+            "**/.classpath": true,
+            "**/.project": true,
+            "**/.settings": true,
+            "**/.factorypath": true
+        },
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.patterns": {
+            "pom.xml": "mvnw,mvnw.cmd,.mvn,HELP.md"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "vscjava.vscode-java-pack",
+            "vscjava.vscode-maven",
+            "vscjava.vscode-spring-initializr",
+            "pivotal.vscode-spring-boot",
+            "vscjava.vscode-spring-boot-dashboard"
+        ]
+    }
+}
