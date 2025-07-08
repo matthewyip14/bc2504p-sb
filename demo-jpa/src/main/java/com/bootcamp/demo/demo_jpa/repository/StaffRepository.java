@@ -13,7 +13,7 @@ public interface StaffRepository extends JpaRepository<StaffEntity, Long> {
   // select * from staffs;
   // insert into staffs values (xxx,xxx...);
   // simliar to update, delete
-
+  
   // ! 1. JPA Method - pre-defined method structure -> SQL
   // ! findByXXX -> Optional or List
   // select * from staffs where name = ?;
