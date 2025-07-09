@@ -7,3 +7,10 @@ spring:
   jpa:
     show-sql: true
     hibernate.ddl-auto: update
+
+service-api:
+  jsonplaceholder:
+    host: "jsonplaceholder.typicode.com"
+    endpoints: 
+      users: "/users"
+      posts: "/posts"
