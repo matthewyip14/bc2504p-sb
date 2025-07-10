@@ -11,4 +11,6 @@ public interface JPService {
   List<UserEntity> getAndSaveUsers();
   List<PostEntity> getAndSavePosts(); // Method to get and save posts, if needed
   List<CommentEntity> getAndSaveComments();
+
+  List<PostEntity> getPostsByUserId(Long userId); // Method to get posts by User ID
 }

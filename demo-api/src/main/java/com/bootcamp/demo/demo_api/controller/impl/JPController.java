@@ -35,4 +35,11 @@ public class JPController implements JPOperation {
   @Override
   public List<CommentEntity> getAndSaveComments() {
     return this.jpService.getAndSaveComments();
+  }
+
+  @Override
+  public List<PostEntity> getPostByUserId(Long userId) {
+    return this.jpService.getPostsByUserId(userId);
+  }
 }
+

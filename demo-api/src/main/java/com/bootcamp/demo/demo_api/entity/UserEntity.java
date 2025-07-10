@@ -1,8 +1,5 @@
 package com.bootcamp.demo.demo_api.entity;
 
-import com.bootcamp.demo.demo_api.model.dto.UserDTO.Address;
-import com.bootcamp.demo.demo_api.model.dto.UserDTO.Company;
-import com.bootcamp.demo.demo_api.model.dto.UserDTO.Geo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,13 +21,18 @@ public class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id; // Auto-increment primary key
-  private Long jphId;
+  @Column(nullable = false) // Ensure this field is not null
+  private Long jphUserId;
+  @Column(nullable = false) // Ensure this field is not null
   private String name; // User's name
-  @Column(name = "user_name") // To avoid conflict with reserved keyword
+  @Column(nullable = false, name = "user_name") // To avoid conflict with reserved keyword
   private String username; // User's username
+  @Column(nullable = false) // Ensure this field is not null
   private String email; // User's email
   // private Address address; // User's address
+  @Column(nullable = false) // Ensure this field is not null
   private String phone; // User's phone number
+  @Column(nullable = false) // Ensure this field is not null
   private String website; // User's website
   // private Company company; // User's company name
 

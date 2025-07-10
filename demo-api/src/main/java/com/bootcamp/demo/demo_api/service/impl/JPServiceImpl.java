@@ -2,9 +2,7 @@ package com.bootcamp.demo.demo_api.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.xml.stream.events.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.bootcamp.demo.demo_api.entity.CommentEntity;
 import com.bootcamp.demo.demo_api.entity.PostEntity;
 import com.bootcamp.demo.demo_api.entity.UserEntity;
+import com.bootcamp.demo.demo_api.mapper.EntityMapper;
 import com.bootcamp.demo.demo_api.model.dto.CommentDTO;
 import com.bootcamp.demo.demo_api.model.dto.PostDTO;
 import com.bootcamp.demo.demo_api.model.dto.UserDTO;
@@ -53,6 +52,9 @@ public class JPServiceImpl implements JPService {
   @Autowired
   private CommentRepository commentRepository; // Repository for PostEntity
 
+  @Autowired
+  private EntityMapper entityMapper; // Mapper to convert DTOs to Entities
+
   @Override
   public List<UserDTO> getUsers() {
     // String url = "https://" + domain + usersEndpoint;
@@ -75,14 +77,7 @@ public class JPServiceImpl implements JPService {
     // ! Convert List<UserDTO> to List<UserEntity>
     List<UserEntity> userEntities = this.getUsers().stream() //
         .map(e -> {
-          return UserEntity.builder() //
-              .jphId(e.getId())
-              .email(e.getEmail()) //
-              .phone((e.getPhone())) //
-              .username(e.getUsername()) //
-              .website(e.getWebsite()) //
-              .name(e.getName()) //
-              .build();
+          return this.entityMapper.map(e); // Use the mapper to convert UserDTO to UserEntity 
         }).collect(Collectors.toList());
     this.userRepository.deleteAll();
     // save to DB
@@ -97,11 +92,7 @@ public class JPServiceImpl implements JPService {
 
           UserEntity userEntity = this.userRepository.findByJphId(e.getUserId())
               .orElseThrow(() -> new RuntimeException("User not found."));
-          return PostEntity.builder() //
-              .title(e.getTitle()) // Post title
-              .body(e.getBody()) // Post body
-              .userEntity(userEntity) // Set the foreign key to UserEntity
-              .build();
+          return this.entityMapper.map(e, userEntity); // Use the mapper to convert PostDTO to PostEntity
         }).collect(Collectors.toList());
     // Save PostEntities to the database
     return this.postRepository.saveAll(postEntities);
@@ -122,18 +113,14 @@ public class JPServiceImpl implements JPService {
 
   @Override
   public List<CommentEntity> getAndSaveComments() {
+    
    List<CommentEntity> commentEntities = this.getComments().stream()
         .map(e -> { // Map CommentDTO to CommentEntity
-        //  System.out.println("userid " + e.getPostId());
+        System.out.println("postid " + e.getPostId());
 
-          PostEntity postEntity = this.postRepository.findByPostId(e.getId())
+          PostEntity postEntity = this.postRepository.findByJphPostId(e.getPostId())
               .orElseThrow(() -> new RuntimeException("Post not found."));
-          return CommentEntity.builder() //
-              .name(e.getName()) // Comment name
-              .email(e.getEmail()) // Comment email
-              .body(e.getBody()) // Comment body
-              .postEntity(postEntity) // Set the foreign key to PostEntity
-              .build();
+          return this.entityMapper.map(e, postEntity);
         }).collect(Collectors.toList());
     // Save PostEntities to the database
     return this.commentRepository.saveAll(commentEntities);
@@ -150,5 +137,13 @@ public class JPServiceImpl implements JPService {
     System.out.println("url = " + url);
     CommentDTO[] users =  this.restTemplate.getForObject(url, CommentDTO[].class);  
     return Arrays.asList(users);
+  }
+
+  @Override
+  public List<PostEntity> getPostsByUserId(Long userId) {
+    UserEntity userEntity = this.userRepository.findById(userId)
+    .orElseThrow(() -> new RuntimeException("User not found."));
+    // Find posts by UserEntity ID
+    return this.postRepository.findByUserEntity(userEntity);
   }
 }
