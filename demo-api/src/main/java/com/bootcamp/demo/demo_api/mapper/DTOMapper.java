@@ -5,7 +5,8 @@ import com.bootcamp.demo.demo_api.dto.HSBCUserDTO;
 import com.bootcamp.demo.demo_api.dto.HSUserDTO;
 import com.bootcamp.demo.demo_api.entity.UserEntity;
 
-@Component
+// idempotency
+@Component // Bean // Static method
 public class DTOMapper {
   // ! Method Signature = method name + parameters
   public HSBCUserDTO mapToHSBC(UserEntity userEntity) {

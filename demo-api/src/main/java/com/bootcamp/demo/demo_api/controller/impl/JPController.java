@@ -29,6 +29,10 @@ public class JPController implements JPOperation {
 
   @Override
   public List<PostEntity> getAndSavePosts() {
+    // approach 1: normal java, try-catch handles exception object
+    //   try {
+    //   return this.jpService.getAndSavePosts(); // ! throw new RuntimeException
+    // }
     return this.jpService.getAndSavePosts();
   }
 

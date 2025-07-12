@@ -29,9 +29,10 @@ public class UserEntity {
   private String name;
   @Column(nullable = false, unique = true, name = "user_name")
   private String username;
+  private String password;
   @Column(nullable = false, unique = true)
   private String email;
   @Column(nullable = false)
   private String phone;
-  private String username;
+
 }

@@ -12,6 +12,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.bootcamp.demo.demo_api.entity.CommentEntity;
 import com.bootcamp.demo.demo_api.entity.PostEntity;
 import com.bootcamp.demo.demo_api.entity.UserEntity;
+import com.bootcamp.demo.demo_api.exception.BusinessException;
+import com.bootcamp.demo.demo_api.exception.SysError;
 import com.bootcamp.demo.demo_api.lib.Scheme;
 import com.bootcamp.demo.demo_api.mapper.EntityMapper;
 import com.bootcamp.demo.demo_api.model.dto.CommentDTO;
@@ -68,6 +70,10 @@ public class JPServiceImpl implements JPService {
         
     System.out.println("url = " + url);
    
+    // ! getForObject():
+    // 1. call API
+    // 2. convert from JSON String to Java object
+    // 3.
     UserDTO[] users =  this.restTemplate.getForObject(url, UserDTO[].class);  
     // Make the GET request to the URL and map the response to UserDTO array  
     return Arrays.asList(users);
@@ -92,7 +98,7 @@ public class JPServiceImpl implements JPService {
           System.out.println("userid " + e.getUserId());
 
           UserEntity userEntity = this.userRepository.findByJphUserId(e.getUserId())
-              .orElseThrow(() -> new RuntimeException("User not found."));
+              .orElseThrow(() -> new BusinessException(SysError.USER_NOT_FOUND));
           return this.entityMapper.map(e, userEntity); // Use the mapper to convert PostDTO to PostEntity
         }).collect(Collectors.toList());
     // Save PostEntities to the database
