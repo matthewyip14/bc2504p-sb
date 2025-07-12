@@ -10,7 +10,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     // This interface will automatically provide CRUD operations for UserEntity
     // No additional methods are needed unless specific queries are required
     // JPA Method
-    Optional<UserEntity> findByJphId(Long jphId);
+    Optional<UserEntity> findByJphUserId(Long jphUserId);
   
 
   

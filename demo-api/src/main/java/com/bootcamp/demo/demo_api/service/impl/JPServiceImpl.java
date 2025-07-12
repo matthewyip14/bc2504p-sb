@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.bootcamp.demo.demo_api.entity.CommentEntity;
 import com.bootcamp.demo.demo_api.entity.PostEntity;
 import com.bootcamp.demo.demo_api.entity.UserEntity;
+import com.bootcamp.demo.demo_api.lib.Scheme;
 import com.bootcamp.demo.demo_api.mapper.EntityMapper;
 import com.bootcamp.demo.demo_api.model.dto.CommentDTO;
 import com.bootcamp.demo.demo_api.model.dto.PostDTO;
@@ -59,7 +60,7 @@ public class JPServiceImpl implements JPService {
   public List<UserDTO> getUsers() {
     // String url = "https://" + domain + usersEndpoint;
     String url = UriComponentsBuilder.newInstance() // Build the URL using UriComponentsBuilder
-        .scheme("https")  // Set the scheme to https
+        .scheme(Scheme.HTTPS.getValue())  // Set the scheme to https
         .host(domain) // Set the host from the property
         .path(usersEndpoint)  // Set the path from the property
         .build()  // Build the URI
@@ -90,7 +91,7 @@ public class JPServiceImpl implements JPService {
         .map(e -> { // Map PostDTO to PostEntity
           System.out.println("userid " + e.getUserId());
 
-          UserEntity userEntity = this.userRepository.findByJphId(e.getUserId())
+          UserEntity userEntity = this.userRepository.findByJphUserId(e.getUserId())
               .orElseThrow(() -> new RuntimeException("User not found."));
           return this.entityMapper.map(e, userEntity); // Use the mapper to convert PostDTO to PostEntity
         }).collect(Collectors.toList());
@@ -101,7 +102,7 @@ public class JPServiceImpl implements JPService {
   private List<PostDTO> getPosts() {
     // String url = "https://" + domain + usersEndpoint;
     String url = UriComponentsBuilder.newInstance() // Build the URL using UriComponentsBuilder
-        .scheme("https")  // Set the scheme to https
+        .scheme(Scheme.HTTPS.getValue())  // Set the scheme to https
         .host(domain) // Set the host from the property
         .path(postsEndpoint)  // Set the path from the property
         .build()  // Build the URI
@@ -129,7 +130,7 @@ public class JPServiceImpl implements JPService {
   private List<CommentDTO> getComments() {
     // String url = "https://" + domain + usersEndpoint;
     String url = UriComponentsBuilder.newInstance() // Build the URL using UriComponentsBuilder
-        .scheme("https")  // Set the scheme to https
+        .scheme(Scheme.HTTPS.getValue())  // Set the scheme to https
         .host(domain) // Set the host from the property
         .path(commentsEndpoint)  // Set the path from the property
         .build()  // Build the URI
@@ -145,5 +146,10 @@ public class JPServiceImpl implements JPService {
     .orElseThrow(() -> new RuntimeException("User not found."));
     // Find posts by UserEntity ID
     return this.postRepository.findByUserEntity(userEntity);
+  }
+
+  @Override
+  public List<UserEntity> findAllUsers() {
+    return this.userRepository.findAll();
   }
 }

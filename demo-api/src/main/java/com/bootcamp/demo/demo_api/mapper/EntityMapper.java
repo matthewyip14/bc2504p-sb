@@ -12,7 +12,7 @@ import com.bootcamp.demo.demo_api.model.dto.UserDTO;
 public class EntityMapper {
   public PostEntity map(PostDTO postDTO, UserEntity userEntity) {
     return PostEntity.builder()
-        .jphId(postDTO.getJphId())
+        .jphPostId(postDTO.getId())
         .id(postDTO.getId())
         .title(postDTO.getTitle())
         .body(postDTO.getBody())

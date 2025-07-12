@@ -13,4 +13,6 @@ public interface JPService {
   List<CommentEntity> getAndSaveComments();
 
   List<PostEntity> getPostsByUserId(Long userId); // Method to get posts by User ID
+
+  List<UserEntity> findAllUsers(); // Method to find all users
 }

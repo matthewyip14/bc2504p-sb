@@ -24,7 +24,7 @@ public class PostEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment primary key
   private Long id; // Primary key
   @Column(nullable = false) // Ensure this field is not null
-  private Long jphId; // Post ID from the external API
+  private Long jphPostId; // Post ID from the external API
   @Column(nullable = false) // Ensure this field is not null
   private Long postId;
   @Column(nullable = false) // Ensure this field is not null
