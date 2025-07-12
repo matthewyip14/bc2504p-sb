@@ -19,6 +19,10 @@
         {
             "name": "demo-jpa",
             "path": "demo-jpa"
+        },
+        {
+            "name": "loan-system",
+            "path": "loan-system"
         }
     ],
     "settings": {
