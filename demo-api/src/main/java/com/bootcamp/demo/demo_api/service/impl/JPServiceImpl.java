@@ -73,7 +73,7 @@ public class JPServiceImpl implements JPService {
     // ! getForObject():
     // 1. call API
     // 2. convert from JSON String to Java object
-    // 3.
+    // 3. return the object
     UserDTO[] users =  this.restTemplate.getForObject(url, UserDTO[].class);  
     // Make the GET request to the URL and map the response to UserDTO array  
     return Arrays.asList(users);
