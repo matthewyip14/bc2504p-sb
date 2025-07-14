@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driverClassName: "org.postgresql.Driver"
+    url: "jdbc:postgresql://localhost:5432/bootcamp_2504p"
+    username: "postgres"
+    password: "admin1234"
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+
+service-api:
+  jsonplaceholder:
+    host: "jsonplaceholder.typicode.com"
+    endpoints: 
+      users: "/users"
+      posts: "/posts"
+      comments: "/comments"

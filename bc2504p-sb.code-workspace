@@ -5,6 +5,10 @@
             "path": "demo-api"
         },
         {
+            "name": "bc-forum",
+            "path": "bc-forum"
+        },
+        {
             "name": "demo-calculator",
             "path": "demo-calculator"
         },
