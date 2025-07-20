@@ -9,16 +9,16 @@ import com.bootcamp.demo.demo_api.entity.PostEntity;
 import com.bootcamp.demo.demo_api.entity.UserEntity;
 import com.bootcamp.demo.demo_api.model.dto.UserDTO;
 import com.bootcamp.demo.demo_api.service.JPService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 public class JPController implements JPOperation {
   @Autowired
   private JPService jpService;
 
-  // ! List<UserDTO> -> Postman (Json) (Serialization)
+  // ! List<UserDTO> -> Postman (JSON) (Serialization)
   @Override
   public List<UserDTO> getAllJPUsers() {
-    
     return jpService.getUsers();
   }
 
@@ -29,9 +29,9 @@ public class JPController implements JPOperation {
 
   @Override
   public List<PostEntity> getAndSavePosts() {
-    // approach 1: normal java, try-catch handles exception object
-    //   try {
-    //   return this.jpService.getAndSavePosts(); // ! throw new RuntimeException
+    // approach 1: normal Java, try-catch handles exception object
+    // try {
+    // return this.jpService.getAndSavePosts(); // ! throw new RuntimeException
     // }
     return this.jpService.getAndSavePosts();
   }
@@ -42,8 +42,8 @@ public class JPController implements JPOperation {
   }
 
   @Override
-  public List<PostEntity> getPostByUserId(Long userId) {
+  public List<PostEntity> getPostsByUserId(Long userId) throws JsonProcessingException {
+    System.out.println("userid=" + userId);
     return this.jpService.getPostsByUserId(userId);
   }
 }
-
