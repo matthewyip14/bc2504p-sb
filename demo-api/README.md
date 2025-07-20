@@ -56,5 +56,11 @@
 ## Part 6:
 - CommandLineRunner (Bean for AOP)
 - Scheduling 
+- ObjectMapper
+- Redis (RedisTemplate/ RedisManager)
 
 ## Part 7:
+
+## Spring Boot Project
+- Update Code -> Save -> harddrive
+- mvn clean install -> generate jar file (target folder)
