@@ -1,0 +1,29 @@
+<html xmlns="http://www.thymeleaf.org">
+  <head>
+    <title>Coingecko Coin Data</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script type="text/javascript" th:src="@{/js/coinpage.js}"></script>
+  </head>
+  <body>
+    <h1>Coingecko Coin Data</h1>
+    <div>
+      <input type="text" class="form-control" id="coinFilter" placeholder="Search coins..."></input>
+    </div>
+    <table class = "styled-table">
+      <thead>
+        <tr>
+          <th>Coin ID</th>
+          <th>Image</th>
+          <th>Current Price (USD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="coin : ${coins}" class="coinRow">
+          <td><img th:src="${coin.image}" height="20"></img></td>
+          <td th:text="${coin.id}"></td>
+          <td th:text="${coin.currentPrice}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
