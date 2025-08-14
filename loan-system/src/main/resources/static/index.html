@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 4px solid #007bff;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left-color: #dc3545;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left-color: #28a745;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏦 Loan Management System</h1>
+
+    <!-- User Management -->
+    <div class="container">
+        <h2>👤 User Management</h2>
+        <div class="grid">
+            <div>
+                <h3>Create User</h3>
+                <form id="createUserForm">
+                    <div class="form-group">
+                        <label for="userName">Name:</label>
+                        <input type="text" id="userName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userUsername">Username:</label>
+                        <input type="text" id="userUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Email:</label>
+                        <input type="email" id="userEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPhone">Phone:</label>
+                        <input type="tel" id="userPhone" required>
+                    </div>
+                    <button type="submit">Create User</button>
+                </form>
+                <div id="createUserResult"></div>
+            </div>
+            <div>
+                <h3>Get User</h3>
+                <form id="getUserForm">
+                    <div class="form-group">
+                        <label for="getUserId">User ID:</label>
+                        <input type="number" id="getUserId" required>
+                    </div>
+                    <button type="submit">Get User</button>
+                </form>
+                <div id="getUserResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loan Calculator -->
+    <div class="container">
+        <h2>🧮 Loan Calculator</h2>
+        <form id="loanCalculatorForm">
+            <div class="grid">
+                <div>
+                    <div class="form-group">
+                        <label for="calcLoanAmount">Loan Amount ($):</label>
+                        <input type="number" id="calcLoanAmount" min="100" max="1000000" value="10000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="calcInterestRate">Interest Rate (%):</label>
+                        <input type="number" id="calcInterestRate" min="1" max="30" step="0.1" value="5.5" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="calcLoanTerm">Loan Term (months):</label>
+                        <input type="number" id="calcLoanTerm" min="1" max="360" value="60" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Calculate</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="calculatorResult"></div>
+    </div>
+
+    <!-- Loan Application -->
+    <div class="container">
+        <h2>📝 Loan Application</h2>
+        <form id="loanApplicationForm">
+            <div class="grid">
+                <div>
+                    <div class="form-group">
+                        <label for="loanUserId">User ID:</label>
+                        <input type="number" id="loanUserId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanAmount">Loan Amount ($):</label>
+                        <input type="number" id="loanAmount" min="100" max="1000000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanInterestRate">Interest Rate (%):</label>
+                        <input type="number" id="loanInterestRate" min="1" max="30" step="0.1" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="loanTerm">Loan Term (months):</label>
+                        <input type="number" id="loanTerm" min="1" max="360" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanPurpose">Purpose:</label>
+                        <textarea id="loanPurpose" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Apply for Loan</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="loanApplicationResult"></div>
+    </div>
+
+    <!-- Loan Management -->
+    <div class="container">
+        <h2>📊 Loan Management</h2>
+        <div class="grid">
+            <div>
+                <h3>Get Loan</h3>
+                <form id="getLoanForm">
+                    <div class="form-group">
+                        <label for="getLoanId">Loan ID:</label>
+                        <input type="number" id="getLoanId" required>
+                    </div>
+                    <button type="submit">Get Loan</button>
+                </form>
+                <div id="getLoanResult"></div>
+            </div>
+            <div>
+                <h3>Loan Actions</h3>
+                <form id="loanActionForm">
+                    <div class="form-group">
+                        <label for="actionLoanId">Loan ID:</label>
+                        <input type="number" id="actionLoanId" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="approveLoan()">Approve</button>
+                        <button type="button" onclick="rejectLoan()">Reject</button>
+                        <button type="button" onclick="disburseLoan()">Disburse</button>
+                    </div>
+                </form>
+                <div id="loanActionResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Processing -->
+    <div class="container">
+        <h2>💳 Payment Processing</h2>
+        <form id="paymentForm">
+            <div class="grid">
+                <div>
+                    <div class="form-group">
+                        <label for="paymentLoanId">Loan ID:</label>
+                        <input type="number" id="paymentLoanId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentAmount">Payment Amount ($):</label>
+                        <input type="number" id="paymentAmount" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="paymentNotes">Notes:</label>
+                        <textarea id="paymentNotes" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Process Payment</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="paymentResult"></div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="container">
+        <h2>📈 Statistics</h2>
+        <button onclick="loadStatistics()">Load Statistics</button>
+        <div id="statisticsResult"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+
+        // User Management
+        document.getElementById('createUserForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userData = {
+                name: document.getElementById('userName').value,
+                username: document.getElementById('userUsername').value,
+                email: document.getElementById('userEmail').value,
+                phone: document.getElementById('userPhone').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/users`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+                const result = await response.json();
+                showResult('createUserResult', result, response.ok);
+            } catch (error) {
+                showResult('createUserResult', { error: error.message }, false);
+            }
+        });
+
+        document.getElementById('getUserForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userId = document.getElementById('getUserId').value;
+            try {
+                const response = await fetch(`${API_BASE}/users/${userId}`);
+                const result = await response.json();
+                showResult('getUserResult', result, response.ok);
+            } catch (error) {
+                showResult('getUserResult', { error: error.message }, false);
+            }
+        });
+
+        // Loan Calculator
+        document.getElementById('loanCalculatorForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const calcData = {
+                loanAmount: parseFloat(document.getElementById('calcLoanAmount').value),
+                interestRate: parseFloat(document.getElementById('calcInterestRate').value),
+                loanTermMonths: parseInt(document.getElementById('calcLoanTerm').value)
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/loans/calculate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(calcData)
+                });
+                const result = await response.json();
+                showResult('calculatorResult', result, response.ok);
+            } catch (error) {
+                showResult('calculatorResult', { error: error.message }, false);
+            }
+        });
+
+        // Loan Application
+        document.getElementById('loanApplicationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loanData = {
+                userId: parseInt(document.getElementById('loanUserId').value),
+                loanAmount: parseFloat(document.getElementById('loanAmount').value),
+                interestRate: parseFloat(document.getElementById('loanInterestRate').value),
+                loanTermMonths: parseInt(document.getElementById('loanTerm').value),
+                purpose: document.getElementById('loanPurpose').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/loans/apply`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(loanData)
+                });
+                const result = await response.json();
+                showResult('loanApplicationResult', result, response.ok);
+            } catch (error) {
+                showResult('loanApplicationResult', { error: error.message }, false);
+            }
+        });
+
+        // Get Loan
+        document.getElementById('getLoanForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loanId = document.getElementById('getLoanId').value;
+            try {
+                const response = await fetch(`${API_BASE}/loans/${loanId}`);
+                const result = await response.json();
+                showResult('getLoanResult', result, response.ok);
+            } catch (error) {
+                showResult('getLoanResult', { error: error.message }, false);
+            }
+        });
+
+        // Loan Actions
+        async function approveLoan() {
+            const loanId = document.getElementById('actionLoanId').value;
+            try {
+                const response = await fetch(`${API_BASE}/loans/${loanId}/approve`, { method: 'PUT' });
+                const result = await response.json();
+                showResult('loanActionResult', result, response.ok);
+            } catch (error) {
+                showResult('loanActionResult', { error: error.message }, false);
+            }
+        }
+
+        async function rejectLoan() {
+            const loanId = document.getElementById('actionLoanId').value;
+            try {
+                const response = await fetch(`${API_BASE}/loans/${loanId}/reject`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reason: 'Rejected by admin' })
+                });
+                const result = await response.json();
+                showResult('loanActionResult', result, response.ok);
+            } catch (error) {
+                showResult('loanActionResult', { error: error.message }, false);
+            }
+        }
+
+        async function disburseLoan() {
+            const loanId = document.getElementById('actionLoanId').value;
+            try {
+                const response = await fetch(`${API_BASE}/loans/${loanId}/disburse`, { method: 'PUT' });
+                const result = await response.json();
+                showResult('loanActionResult', result, response.ok);
+            } catch (error) {
+                showResult('loanActionResult', { error: error.message }, false);
+            }
+        }
+
+        // Payment Processing
+        document.getElementById('paymentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const paymentData = {
+                loanId: parseInt(document.getElementById('paymentLoanId').value),
+                amount: parseFloat(document.getElementById('paymentAmount').value),
+                notes: document.getElementById('paymentNotes').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/payments/process`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(paymentData)
+                });
+                const result = await response.json();
+                showResult('paymentResult', result, response.ok);
+            } catch (error) {
+                showResult('paymentResult', { error: error.message }, false);
+            }
+        });
+
+        // Statistics
+        async function loadStatistics() {
+            try {
+                const [loanStats, paymentStats] = await Promise.all([
+                    fetch(`${API_BASE}/loans/statistics`).then(r => r.json()),
+                    fetch(`${API_BASE}/payments/statistics`).then(r => r.json())
+                ]);
+
+                const statsHtml = `
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-number">${loanStats.totalLoans || 0}</div>
+                            <div class="stat-label">Total Loans</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${loanStats.pendingCount || 0}</div>
+                            <div class="stat-label">Pending Loans</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${loanStats.activeCount || 0}</div>
+                            <div class="stat-label">Active Loans</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${paymentStats.totalPayments || 0}</div>
+                            <div class="stat-label">Total Payments</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${paymentStats.completedCount || 0}</div>
+                            <div class="stat-label">Completed Payments</div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('statisticsResult').innerHTML = statsHtml;
+            } catch (error) {
+                showResult('statisticsResult', { error: error.message }, false);
+            }
+        }
+
+        function showResult(elementId, data, isSuccess) {
+            const element = document.getElementById(elementId);
+            const className = isSuccess ? 'result success' : 'result error';
+            element.className = className;
+            element.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+    </script>
+</body>
+</html> 

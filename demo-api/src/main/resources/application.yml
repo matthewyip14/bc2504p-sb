@@ -1,12 +1,18 @@
 spring:
   datasource:
     driverClassName: "org.postgresql.Driver"
-    url: "jdbc:postgresql://localhost:5432/bootcamp_2504p"
+    url: "jdbc:postgresql://postgres-container:5432/bootcamp_2504p"
     username: "postgres"
     password: "admin1234"
   jpa:
     show-sql: true
     hibernate.ddl-auto: update
+  data:
+    redis:
+      host: "redis-container"
+      port: 6379
+      database: 0
+      timeout: 2000
 
 service-api:
   jsonplaceholder:
@@ -15,3 +21,6 @@ service-api:
       users: "/users"
       posts: "/posts"
       comments: "/comments"
+
+server:
+  port: 8082

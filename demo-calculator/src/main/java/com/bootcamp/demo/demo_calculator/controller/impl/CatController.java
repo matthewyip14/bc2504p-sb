@@ -34,18 +34,16 @@ public class CatController implements CatOperation {
   // ! @Autowired - Spring will help us to inject the bean into the field
   // ! @Autowired - Spring will help us to inject the bean into the constructor
   // ! @Autowired - Spring will help us to inject the bean into the setter method 
-  @Autowired // ! The way to ask Spring manager help to pick up the bean 呼喚
+  @Autowired // ! The way to ask Spring manager help pick up the bean
   private CatService catService; // bean
 
-  // @Autowired
-  // private Dog dog;
+  @Autowired
+  private Dog dog;
 
-  // @Override
-  // public Integer dogSum(Integer a, Integer b) {
-  //   return this.dog.sum(a, b);
-  // }
-  
-
+  @Override
+  public Integer dogSum(Integer x, Integer y) {
+    return this.dog.sum(x, y);
+  }
   
 
   @Override
@@ -80,5 +78,5 @@ public class CatController implements CatOperation {
   @Override
   public List<Cat> getAllCats() {
     return this.catService.getAllCats();
-  } 
+  }
 }
